@@ -57,7 +57,7 @@ export function maxAndMin(numbers) {
  */
 export function countArray(array) {
     let obj = {}
-    for (let x in array) {
+    for (const x of array) {
         let w = x + ''
         if (w in obj) {
             obj[w] = obj[w] + 1
