@@ -35,7 +35,8 @@ function getAvgMpg() {
     }
     city1 = city1 / mpg_data.length
     hway1 = hway1 / mpg_data.length
-    let obj = {city: city1, highway: highway1}
+    let obj = {city: city1, highway: hway1}
+    return obj
 }
 
 
