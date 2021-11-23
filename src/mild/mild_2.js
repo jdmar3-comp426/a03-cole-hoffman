@@ -25,7 +25,7 @@ export function identifyVariable(variable) {
  */
 export function identifyArray(array) {
    let newray = []
-   for (let x in array) {
+   for (const x of array) {
       newray.push(identifyVariable(x))
    }
    return newray
