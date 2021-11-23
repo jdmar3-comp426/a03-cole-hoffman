@@ -21,10 +21,9 @@ see under the methods section
  */
 export const allCarStats = {
     avgMpg: getAvgMpg(),
-    allYearStats: undefined,
+    allYearStats: getAllYearStats(),
     ratioHybrids: undefined,
 };
-
 
 function getAvgMpg() {
     let city1 = 0
@@ -39,6 +38,13 @@ function getAvgMpg() {
     return obj
 }
 
+function getAllYearStats() {
+    let statArray = []
+    for (const x of mpg_data) {
+        statArray.push(x["year"])
+    }
+    return getStatistics(statArray)
+}
 
 
 /**
