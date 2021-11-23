@@ -22,7 +22,7 @@ see under the methods section
 export const allCarStats = {
     avgMpg: getAvgMpg(),
     allYearStats: getAllYearStats(),
-    ratioHybrids: undefined,
+    ratioHybrids: getHybrids(),
 };
 
 function getAvgMpg() {
@@ -44,6 +44,16 @@ function getAllYearStats() {
         statArray.push(x["year"])
     }
     return getStatistics(statArray)
+}
+
+function getHybrids() {
+    let hybrids = 0
+    for (const x of mpg_data) {
+        if (x["hybrid"]) {
+            hybrids = hybrids + 1
+        }
+    }
+    return hybrids / mpg_data.length
 }
 
 
