@@ -28,6 +28,7 @@ export function identifyArray(array) {
    for (let x in array) {
       newray.push(identifyVariable(x))
    }
+   return newray
 }
 
 /**
