@@ -42,7 +42,7 @@ export function getIncreasingArray(startNumber, endNumber) {
 export function maxAndMin(numbers) {
     let min1 = Math.min(...numbers)
     let max1 = Math.max(...numbers)
-    return {min: min1, max: max1}
+    return {max: max1, min: min1}
 }
 
 /**
@@ -59,9 +59,9 @@ export function countArray(array) {
     let obj = {}
     for (let x in array) {
         if (x + '' in array) {
-            obj.x = obj.x + 1
+            obj[x] = obj[x] + 1
         } else {
-            obj.x = 1
+            obj[x] = 1
         }
     }
 }
