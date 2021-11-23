@@ -29,9 +29,9 @@ export function getMedian(array) {
     array.sort(function(a, b){return a - b})
     let x
     if (array.length % 2 == 0) {
-        x = (array[array.length - 1] + array[array.length]) / 2
+        x = (array[(array.length/2) - 1] + array[array.length/2]) / 2
     } else {
-        x = (array[array.length - 0.5])
+        x = (array[(array.length/2) - 0.5])
     }
     return x
 }
