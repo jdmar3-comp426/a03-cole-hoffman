@@ -68,7 +68,7 @@ function makeHybrids() {
         }
     }
     let make = []
-    for (const x of ids.keys) {
+    for (const x of ids.keys()) {
         if (make[make.length - 1].hybrids.length > ids.get(x).length) {
             make.push(hybObjs(x, ids.get(x)))
         } else {
