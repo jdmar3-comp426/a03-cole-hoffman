@@ -56,6 +56,33 @@ function getHybrids() {
     return hybrids / mpg_data.length
 }
 
+function makeHybrids() {
+    const ids = new Map()
+    for (const x of mpg_data) {
+        if (x["hybrid"]) {
+            if (ids.has(x["make"])) {
+                ids.get(x["make"]).push(x["id"])
+            } else {
+                ids.set(x["make"], [x["id"]])
+            }
+        }
+    }
+    let make = []
+    for (const x of ids.keys) {
+        if (make[make.length - 1].hybrids.length > ids.get(x).length) {
+            make.push(hybObjs(x, ids.get(x)))
+        } else {
+            let temp = Object.assign(make[make.length - 1])
+            make[make.length - 1] = hybObjs(x, ids.get(x))
+            make.push(temp)
+        }
+    }
+    return make
+}
+function hybObjs(make, idList) {
+    let obj = {"make": make, "hybrids": idList}
+    return obj
+}
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
@@ -115,6 +142,6 @@ function getHybrids() {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: makeHybrids(),
     avgMpgByYearAndHybrid: undefined
 };
