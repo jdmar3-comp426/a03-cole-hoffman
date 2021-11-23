@@ -96,7 +96,7 @@ export function removeKeyNonDestructive(object, key) {
  */
 export function removeKeys(object, keyList) {
    let newObj = Object.assign({}, object)
-   for (let x in keyList) {
+   for (const x of keyList) {
       delete newObj[key]
    }
    return newObj
