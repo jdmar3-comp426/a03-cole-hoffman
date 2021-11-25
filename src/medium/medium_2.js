@@ -143,7 +143,87 @@ function hybObjs(make, idList) {
  *
  * }
  */
-export const moreStats = {
+
+function newStyle() {
+    const years = new Map()
+    let copy = mpg_data
+    while (copy.length > 0) {
+        let year = copy[0]["year"]
+        let cityHyb = []
+        let highHyb = []
+        let cityNot = []
+        let highNot = []
+        for (let i = 0; i < copy.length; i++) {
+            if (copy[i]["year"] == year) {
+                if (copy[i]["hybrid"]) {
+                    cityHyb.push(copy[i]["city_mpg"])
+                    highHyb.push(copy[i]["highway_mpg"])
+                } else {
+                    cityNot.push(copy[i]["city_mpg"])
+                    highNot.push(copy[i]["highway_mpg"])
+                }
+            }
+        }
+        for (const x of copy) {
+            if (x["year"] == year) {
+                copy.slice(copy.indexOf(x))
+            }
+        }
+        let cH = summer(cityHyb)
+        let hH = summer(highHyb)
+        let cN = summer(cityNot)
+        let hN = summer(highNot)
+        let temp = {hybrid: {city: cH, highway: hH}, notHybrid: {city: cN, highway: hN}}
+        years.set(year, temp)
+    }
+}
+
+function summer(array) {
+    let sum = 0
+    for (const x of array) {
+        sum = sum + x
+    }
+    sum = sum / array.length
+    return sum
+}
+
+
+
+function avgMpgYrHyb() {
+    const avgTracker = {}
+    const years = new Map()
+    for (const x of mpg_data) {
+        if (x["hybrid"]) {
+            if (years.has(x["year"])) {
+                years.get(x["make"]).push(x["id"])
+            } else {
+                years.set(x["year"], hybOrNah)
+                let curCity = years.get(x["year"]).get(notHybrid).get(city)
+                years.get(x["year"]).get(notHybrid).set(city, curCity + x["city_mpg"])
+                let curHway = years.get(x["year"]).get(notHybrid).get(highway)
+                years.get(x["year"]).get(notHybrid).set(city, curHway + x["highway_mpg"])
+                let year = x["year"]
+            }
+        }
+    }
+}
+
+function hybOrNah() {
+    let map = new Map()
+    map.set(hybrid, cityHwy(0, 0))
+    map.set(notHybrid, cityHwy(0,0))
+}
+
+function cityHwy(cityMpg, hwayMpg) {
+    let map = new Map()
+    map.set(city, cityMpg)
+    map.set(highway, hwayMpg)
+    return map
+}
+
+
+
+ export const moreStats = {
     makerHybrids: makeHybrids(),
-    avgMpgByYearAndHybrid: undefined
+    avgMpgByYearAndHybrid: newStyle()
 };
