@@ -171,7 +171,8 @@ function finalAttempt() {
             years.set(x.year, internalObj)
         }
     }
-    return years
+    const sorted = new Map([...years.entries].sort())
+    return sorted
 }
 
 
