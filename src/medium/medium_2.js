@@ -144,6 +144,25 @@ function hybObjs(make, idList) {
  * }
  */
 
+function finalAttempt() {
+    const years = new Map()
+    for (const x of mpg_data) {
+        if (!years.has(x.year)) {
+            const tempArray = mpg_data.filter(x => x.year == year)
+            const tempHyb = tempArray.filter(x => x.hybrid == true)
+            const tempNot = tempArray.filter(x => x.hybrid == false)
+            let avgHybCity = tempHyb.reduce((prev, curr) => prev.city_mpg + curr.city_mpg) / tempHyb.length
+            let avgHybHigh = tempHyb.reduce((prev, curr) => prev.highway_mpg + curr.highway_mpg) / tempHyb.length
+            let avgNotCity = tempNot.reduce((prev, curr) => prev.city_mpg + curr.city_mpg) / tempNot.length
+            let avgNotHigh = tempNot.reduce((prev, curr) => prev.highway_mpg + curr.highway_mpg) / tempNot.length
+            let internalObj = {hybrid: {city: avgHybCity, highway: avgHybHigh}, notHybrid: {city: avgNotCity, highway: avgNotHigh}}
+            years.set(x.year, internalObj)
+        }
+    }
+    return years
+}
+
+
 function newStyle() {
     const years = new Map()
     let copy = mpg_data
@@ -225,5 +244,5 @@ function cityHwy(cityMpg, hwayMpg) {
 
  export const moreStats = {
     makerHybrids: makeHybrids(),
-    avgMpgByYearAndHybrid: newStyle()
+    avgMpgByYearAndHybrid: finalAttempt()
 };
