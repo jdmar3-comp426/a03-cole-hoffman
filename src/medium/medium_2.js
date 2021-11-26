@@ -172,7 +172,8 @@ function finalAttempt() {
         }
     }
     const sorted = new Map([...years.entries()].sort())
-    return sorted
+    const obj = Object.fromEntries(sorted)
+    return obj
 }
 
 
