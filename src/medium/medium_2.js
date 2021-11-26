@@ -148,9 +148,9 @@ function finalAttempt() {
     const years = new Map()
     for (const x of mpg_data) {
         if (!years.has(x.year)) {
-            const tempArray = mpg_data.filter(x => x.year == year)
-            const tempHyb = tempArray.filter(x => x.hybrid == true)
-            const tempNot = tempArray.filter(x => x.hybrid == false)
+            const tempArray = mpg_data.filter(w => w.year == x.year)
+            const tempHyb = tempArray.filter(w => w.hybrid == true)
+            const tempNot = tempArray.filter(w => w.hybrid == false)
             let avgHybCity = tempHyb.reduce((prev, curr) => prev.city_mpg + curr.city_mpg) / tempHyb.length
             let avgHybHigh = tempHyb.reduce((prev, curr) => prev.highway_mpg + curr.highway_mpg) / tempHyb.length
             let avgNotCity = tempNot.reduce((prev, curr) => prev.city_mpg + curr.city_mpg) / tempNot.length
