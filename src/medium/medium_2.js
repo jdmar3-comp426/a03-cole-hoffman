@@ -151,10 +151,22 @@ function finalAttempt() {
             const tempArray = mpg_data.filter(w => w.year == x.year)
             const tempHyb = tempArray.filter(w => w.hybrid == true)
             const tempNot = tempArray.filter(w => w.hybrid == false)
-            let avgHybCity = tempHyb.reduce((prev, curr) => prev.city_mpg + curr.city_mpg) / tempHyb.length
-            let avgHybHigh = tempHyb.reduce((prev, curr) => prev.highway_mpg + curr.highway_mpg) / tempHyb.length
-            let avgNotCity = tempNot.reduce((prev, curr) => prev.city_mpg + curr.city_mpg) / tempNot.length
-            let avgNotHigh = tempNot.reduce((prev, curr) => prev.highway_mpg + curr.highway_mpg) / tempNot.length
+            let avgHybCity = 0
+            let avgHybHigh = 0
+            for (const x of tempHyb) {
+                avgHybCity = avgHybCity + x.city_mpg
+                avgHybHigh = avgHybHigh + x.highway_mpg
+            }
+            avgHybCity = avgHybCity / tempHyb.length
+            avgHybHigh = avgHybHigh / tempHyb.length
+            let avgNotCity = 0
+            let avgNotHigh = 0
+            for (const x of tempNot) {
+                avgNotCity = avgNotCity + x.city_mpg
+                avgNotHigh = avgNotHigh + x.highway_mpg
+            }
+            avgNotCity = avgNotCity / tempNot.length
+            avgNotHigh = avgNotHigh / tempNot.length
             let internalObj = {hybrid: {city: avgHybCity, highway: avgHybHigh}, notHybrid: {city: avgNotCity, highway: avgNotHigh}}
             years.set(x.year, internalObj)
         }
