@@ -17,7 +17,7 @@
 export const repeat = (fn, n, ...params) => {
     let rtrn = []
     for (let i = 0; i < n; i++) {
-        rtrn[i] = fn(params[i])
+        rtrn.push(fn(params))
     }
     return rtrn
 };
@@ -28,7 +28,7 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-    repeat(printa, 10, ["Hello, world!","Hello, world!","Hello, world!","Hello, world!","Hello, world!","Hello, world!","Hello, world!","Hello, world!","Hello, world!","Hello, world!"])
+    repeat(printa, 10, ["Hello, world!"])
 };
 function printa(s) {
     console.log(s)
