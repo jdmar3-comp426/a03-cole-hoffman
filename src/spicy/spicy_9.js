@@ -31,7 +31,7 @@ export const repeatDemo = () => {
     repeat(printa, 10, ["Hello, world!"])
 };
 function printa(s) {
-    console.log(s)
+    console.log(s[0])
 }
 
 
