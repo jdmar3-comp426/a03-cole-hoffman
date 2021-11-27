@@ -49,19 +49,19 @@ function printa(s) {
  */
 export const multiplyBy = (num1) => {
 
-    return two(num2)
+    return function (num2) {
+        return num1 * num2
+    }
 
 };
-function two(num2) {
-    return num1 * num2
-}
+
 
 
 /**
  * Use the multiplyBy function to create and export a function named
  *   "tenTimes" that multiplies a number by 10.
  */
-export const tenTimes = () => {multiplyBy(10)};
+export const tenTimes = (num1) => {multiplyBy(num1)(10)};
 
 
 /**
